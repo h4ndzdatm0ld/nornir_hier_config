@@ -1,0 +1,61 @@
+[tool.poetry]
+name = "nornir_hier_config"
+version = "0.1.0"
+authors = ["Hugo Tinoco <hugotinoco@icloud.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+description = "Collection of tasks using the hier-config module."
+repository = "https://github.com/h4ndzdatm0ld/nornir_hier_config"
+keywords = ["nornir", "hier-config", "config-remediation"]
+documentation = "https://tbd"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.10"
+hier-config = "^2.2.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+nornir = "^3.2.0"
+yamllint = "^1.26.3"
+flake8 = "^4.0.1"
+pylint = "^2.11.1"
+sphinx-rtd-theme = "^1.0.0"
+sphinx-autoapi = "^1.8.4"
+myst-parser = "^0.15.2"
+Sphinx = "^4.3.0"
+pydocstyle = "^6.1.1"
+isort = "^5.10.1"
+coverage = "^6.1.2"
+bandit = "^1.7.1"
+pytest-cov = "^3.0.0"
+black = "^21.11b1"
+mypy = "^0.910"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.black]
+line-length = 120
+target-version = ['py37']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+)
+'''

@@ -1,0 +1,14 @@
+[run]
+branch = True
+source = nornir_hier_config
+
+[report]
+show_missing = true
+
+exclude_lines =
+    if self.debug:
+    self.connection.close_session()
+    pragma: no cover
+    raise NotImplementedError
+    if __name__ == .__main__.:
+ignore_errors = True

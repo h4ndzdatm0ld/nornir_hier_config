@@ -1,0 +1,9 @@
+---
+version: "3.8"
+services:
+  tests:
+    container_name: "test"
+    hostname: "test"
+    build:
+      context: "."
+      target: "test"
