@@ -1,0 +1,42 @@
+:py:mod:`tasks.hier_remediation`
+================================
+
+.. py:module:: tasks.hier_remediation
+
+.. autoapi-nested-parse::
+
+   Hier Config Remediation Nornir Task.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   tasks.hier_remediation.remediation
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   tasks.hier_remediation.log
+
+
+.. py:data:: log
+   
+
+   
+
+.. py:function:: remediation(task: nornir.core.task.Task, running_config: str, generated_config: str, remediation_config: str, options: Optional[str] = None, tags: Optional[str] = None, exclude_tags: Optional[List[str]] = None, include_tags: Optional[List[str]] = None) -> nornir.core.task.Result
+
+   Hier-Config Remediation Task.
+
+

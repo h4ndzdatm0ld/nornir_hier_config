@@ -1,0 +1,71 @@
+:py:mod:`nornir_hier_config.utilities`
+======================================
+
+.. py:module:: nornir_hier_config.utilities
+
+.. autoapi-nested-parse::
+
+   Utilities.
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   general/index.rst
+
+
+Package Contents
+----------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   nornir_hier_config.utilities.check_file
+   nornir_hier_config.utilities.create_folder
+   nornir_hier_config.utilities.write_file
+   nornir_hier_config.utilities.write_output
+
+
+
+.. py:function:: check_file(file_name: Optional[str]) -> bool
+
+   Check file_name exists based on input.
+
+   Args:
+       file_name (str): file name to check
+
+
+.. py:function:: create_folder(directory: str) -> None
+
+   Create a directory.
+
+   Args:
+       directory (str): Directory path to create
+
+
+.. py:function:: write_file(text: str, filename: str) -> None
+
+   Take input and write a file.
+
+   Args:
+       text (str): text to write
+       filename (str): filename
+
+
+.. py:function:: write_output(text: str, path: str, filename: str) -> None
+
+   Take input and path and write a file.
+
+   Args:
+       text (str): text to write
+       path (str): directory path
+       filename (str): filename
+
+

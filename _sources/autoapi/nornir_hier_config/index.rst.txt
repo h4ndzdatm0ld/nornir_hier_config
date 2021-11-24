@@ -1,0 +1,28 @@
+:py:mod:`nornir_hier_config`
+============================
+
+.. py:module:: nornir_hier_config
+
+.. autoapi-nested-parse::
+
+   Nornir Hier Config.
+
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   utilities/index.rst
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+   :annotation: = 0.1.0
+
+   
+
