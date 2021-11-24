@@ -38,10 +38,9 @@ RUN echo 'Running Flake8' && \
     echo 'Running MyPy' && \
     mypy .
 
-# RUN pytest --cov nornir_hier_config --color yes -vvv tests
+RUN pytest --cov nornir_hier_config --color yes -vvv tests
 
 # Run full test suite including integration
-ENTRYPOINT ["pytest"]
+# ENTRYPOINT ["pytest"]
 
-CMD ["--cov=nornir_hier_config", "--color=yes", "--disable-pytest-warnings", "-vvv"]
-
+# CMD ["--cov=nornir_hier_config", "--color=yes", "--disable-pytest-warnings", "-vvv" "tests"]
