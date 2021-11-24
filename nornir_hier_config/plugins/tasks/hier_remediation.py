@@ -22,7 +22,19 @@ def remediation(
     exclude_tags: Optional[List[str]] = None,
     include_tags: Optional[List[str]] = None,
 ) -> Result:
-    """Hier-Config Remediation Task."""
+    """Hier Config Remediation Task.
+
+    Args:
+        task (Task): Task
+        running_config (str): Running Configuration. Path to file or string format.
+        generated_config (str): Generated Configuration. Path to file or string format.
+        remediation_config (str): Path to where remediation configuration should be placed.
+        options (Optional[str], optional): Path to Yaml file. Defaults to None and can be extracted from vars.
+        include_tags (Optional[List[str]], optional): [description]. Defaults to None. # TODO: vars?
+
+    Returns:
+        Result
+    """
     failed = False
     result: Dict[str, str] = {}
 
