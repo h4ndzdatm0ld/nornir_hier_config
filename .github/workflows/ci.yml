@@ -3,9 +3,9 @@ name: "nornir_hier_config"
 
 on:
   push:
-    branches: [ "*" ]
+    branches: ["*"]
   pull_request:
-    branches: [ "develop", "master" ]
+    branches: ["develop", "master"]
 
 jobs:
   linters:
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.8', '3.9', '3.10']
+        python-version: ["3.8", "3.9", "3.10"]
     steps:
       - uses: actions/checkout@v2
       - name: Setup python
@@ -57,7 +57,7 @@ jobs:
 
       - name: Pytest
         run: |
-          poetry run pytest --cov=nornir_hier_config --cov-report=xml -vv
+          poetry run pytest --cov=nornir_hier_config --cov-report=xml -vvvv
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
