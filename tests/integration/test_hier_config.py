@@ -1,6 +1,7 @@
 """Test Execution of Hier Remediation Tasks."""
-from nornir_hier_config.plugins.tasks import remediation
 from nornir_utils.plugins.functions import print_result
+
+from nornir_hier_config.plugins.tasks import remediation
 
 SINGLE_XR_DEVICE = "PHX_LAB_01_XR"
 
