@@ -28,9 +28,10 @@ Functions
 .. autoapisummary::
 
    nornir_hier_config.utilities.check_file
+   nornir_hier_config.utilities.compare_files_state
    nornir_hier_config.utilities.create_folder
+   nornir_hier_config.utilities.get_yaml
    nornir_hier_config.utilities.write_file
-   nornir_hier_config.utilities.write_output
 
 
 
@@ -42,6 +43,18 @@ Functions
        file_name (str): file name to check
 
 
+.. py:function:: compare_files_state(remediation_config: str, remediation_config_string: str) -> Dict[Any, Any]
+
+   Evaluate hashes to determine if an existing file has changed.
+
+   Args:
+       remediation_config (str): Remediation Config path
+       remediation_config_string (str): Generated Remediation string
+
+   Returns:
+       result (TypedDict): True or False depending on if files equal each other and diff.
+
+
 .. py:function:: create_folder(directory: str) -> None
 
    Create a directory.
@@ -50,22 +63,17 @@ Functions
        directory (str): Directory path to create
 
 
+.. py:function:: get_yaml(file_path: str) -> Any
+
+   Safe load a YAML file.
+
+
 .. py:function:: write_file(text: str, filename: str) -> None
 
    Take input and write a file.
 
    Args:
        text (str): text to write
-       filename (str): filename
-
-
-.. py:function:: write_output(text: str, path: str, filename: str) -> None
-
-   Take input and path and write a file.
-
-   Args:
-       text (str): text to write
-       path (str): directory path
        filename (str): filename
 
 

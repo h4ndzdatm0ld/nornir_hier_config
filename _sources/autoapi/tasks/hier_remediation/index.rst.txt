@@ -44,10 +44,44 @@ Attributes
        running_config (str): Running Configuration. Path to file or string format.
        generated_config (str): Generated Configuration. Path to file or string format.
        remediation_config (str): Path to where remediation configuration should be placed.
-       options (Optional[str], optional): Path to Yaml file. Defaults to None and can be extracted from vars.
-       include_tags (Optional[List[str]], optional): [description]. Defaults to None. # TODO: vars?
+       options (Optional[str], optional): Path to Yaml file. Defaults to None but must be supplied as vars.
+       exclude_tags (Optional[List[str]], optional): Exclude tags. Defaults to None but can be supplied as vars.
+       include_tags (Optional[List[str]], optional): Include tags. Defaults to None but can be supplied as vars.
 
    Returns:
        Result
+
+   Example:
+       ```
+       nr.run(
+       remediation,
+       running_config=f"{test_path}/running_config.txt",
+       generated_config=f"{test_path}/intended_config.txt",
+       remediation_config=f"{test_path}/remediation_config.txt",
+       )
+       ```
+
+       If no YAML file with Options and Tags, you must specify them in Group Vars. The following keys are accessed
+       to retrieve the corresponding data:
+
+       - `hier_options` - Hier Config Options for device platform
+       - `hier_tags` - Hier Config Tags for device platform
+       - `hier_include_tags` - Hier Config Include Tags for remediation output
+       - `hier_exclude_tags` - Hier Config Exclude Tags for remediation output
+
+       This is what group vars should look like. This pattern applies for the above
+       keys.
+
+       ```
+       ---
+       iosxr:
+       username: "some_user"
+       password: "some_password"
+       port: 830
+       platform: "iosxr"
+       data:
+           hier_options:  <--- All keys of interest fall under `data`.
+           style: "iosxr"
+       ```
 
 

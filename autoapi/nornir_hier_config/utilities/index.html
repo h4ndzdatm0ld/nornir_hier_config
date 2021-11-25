@@ -95,14 +95,17 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.check_file" title="nornir_hier_config.utilities.check_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_file</span></code></a>(file_name: Optional[str]) → bool</p></td>
 <td><p>Check file_name exists based on input.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.create_folder" title="nornir_hier_config.utilities.create_folder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_folder</span></code></a>(directory: str) → None</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.compare_files_state" title="nornir_hier_config.utilities.compare_files_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_files_state</span></code></a>(remediation_config: str, remediation_config_string: str) → Dict[Any, Any]</p></td>
+<td><p>Evaluate hashes to determine if an existing file has changed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.create_folder" title="nornir_hier_config.utilities.create_folder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_folder</span></code></a>(directory: str) → None</p></td>
 <td><p>Create a directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.get_yaml" title="nornir_hier_config.utilities.get_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_yaml</span></code></a>(file_path: str) → Any</p></td>
+<td><p>Safe load a YAML file.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.write_file" title="nornir_hier_config.utilities.write_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_file</span></code></a>(text: str, filename: str) → None</p></td>
 <td><p>Take input and write a file.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.write_output" title="nornir_hier_config.utilities.write_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_output</span></code></a>(text: str, path: str, filename: str) → None</p></td>
-<td><p>Take input and path and write a file.</p></td>
 </tr>
 </tbody>
 </table>
@@ -112,6 +115,19 @@
 <dd><p>Check file_name exists based on input.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>file_name (str): file name to check</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nornir_hier_config.utilities.compare_files_state">
+<span class="sig-prename descclassname"><span class="pre">nornir_hier_config.utilities.</span></span><span class="sig-name descname"><span class="pre">compare_files_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remediation_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remediation_config_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#nornir_hier_config.utilities.compare_files_state" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluate hashes to determine if an existing file has changed.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>remediation_config (str): Remediation Config path
+remediation_config_string (str): Generated Remediation string</p>
+</dd>
+<dt>Returns:</dt><dd><p>result (TypedDict): True or False depending on if files equal each other and diff.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -127,23 +143,17 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="nornir_hier_config.utilities.get_yaml">
+<span class="sig-prename descclassname"><span class="pre">nornir_hier_config.utilities.</span></span><span class="sig-name descname"><span class="pre">get_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#nornir_hier_config.utilities.get_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>Safe load a YAML file.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="nornir_hier_config.utilities.write_file">
 <span class="sig-prename descclassname"><span class="pre">nornir_hier_config.utilities.</span></span><span class="sig-name descname"><span class="pre">write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#nornir_hier_config.utilities.write_file" title="Permalink to this definition"></a></dt>
 <dd><p>Take input and write a file.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>text (str): text to write
-filename (str): filename</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="nornir_hier_config.utilities.write_output">
-<span class="sig-prename descclassname"><span class="pre">nornir_hier_config.utilities.</span></span><span class="sig-name descname"><span class="pre">write_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#nornir_hier_config.utilities.write_output" title="Permalink to this definition"></a></dt>
-<dd><p>Take input and path and write a file.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>text (str): text to write
-path (str): directory path
 filename (str): filename</p>
 </dd>
 </dl>

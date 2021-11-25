@@ -112,15 +112,46 @@
 <dt class="sig sig-object py" id="tasks.hier_remediation.remediation">
 <span class="sig-prename descclassname"><span class="pre">tasks.hier_remediation.</span></span><span class="sig-name descname"><span class="pre">remediation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">nornir.core.task.Task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">running_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generated_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remediation_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">nornir.core.task.Result</span></span></span><a class="headerlink" href="#tasks.hier_remediation.remediation" title="Permalink to this definition"></a></dt>
 <dd><p>Hier Config Remediation Task.</p>
-<dl class="simple">
+<dl>
 <dt>Args:</dt><dd><p>task (Task): Task
 running_config (str): Running Configuration. Path to file or string format.
 generated_config (str): Generated Configuration. Path to file or string format.
 remediation_config (str): Path to where remediation configuration should be placed.
-options (Optional[str], optional): Path to Yaml file. Defaults to None and can be extracted from vars.
-include_tags (Optional[List[str]], optional): [description]. Defaults to None. # TODO: vars?</p>
+options (Optional[str], optional): Path to Yaml file. Defaults to None but must be supplied as vars.
+exclude_tags (Optional[List[str]], optional): Exclude tags. Defaults to None but can be supplied as vars.
+include_tags (Optional[List[str]], optional): Include tags. Defaults to None but can be supplied as vars.</p>
 </dd>
 <dt>Returns:</dt><dd><p>Result</p>
+</dd>
+<dt>Example:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">nr.run(</span>
+<span class="pre">remediation,</span>
+<span class="pre">running_config=f&quot;{test_path}/running_config.txt&quot;,</span>
+<span class="pre">generated_config=f&quot;{test_path}/intended_config.txt&quot;,</span>
+<span class="pre">remediation_config=f&quot;{test_path}/remediation_config.txt&quot;,</span>
+<span class="pre">)</span>
+<span class="pre">`</span></code></p>
+<p>If no YAML file with Options and Tags, you must specify them in Group Vars. The following keys are accessed
+to retrieve the corresponding data:</p>
+<ul class="simple">
+<li><p><cite>hier_options</cite> - Hier Config Options for device platform</p></li>
+<li><p><cite>hier_tags</cite> - Hier Config Tags for device platform</p></li>
+<li><p><cite>hier_include_tags</cite> - Hier Config Include Tags for remediation output</p></li>
+<li><p><cite>hier_exclude_tags</cite> - Hier Config Exclude Tags for remediation output</p></li>
+</ul>
+<p>This is what group vars should look like. This pattern applies for the above
+keys.</p>
+<p>iosxr:
+username: “some_user”
+password: “some_password”
+port: 830
+platform: “iosxr”
+data:</p>
+<blockquote>
+<div><p>hier_options:  &lt;— All keys of interest fall under <cite>data</cite>.
+style: “iosxr”</p>
+</div></blockquote>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a></p>
 </dd>
 </dl>
 </dd></dl>
