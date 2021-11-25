@@ -3,7 +3,7 @@ import os
 import pathlib
 from unittest.mock import patch
 
-from nornir_hier_config.utilities import check_file, create_folder, write_output
+from nornir_hier_config.utilities import check_file, create_folder
 
 TEST_FOLDER = "tests/data/test_folder_success"
 
@@ -32,22 +32,6 @@ def test_create_folder_exception(os_mock, test_folder):
     # using pathlib as we patched OS
     path = pathlib.Path("folder")
     assert not path.exists()
-
-
-# Test Write Output
-
-
-def test_write_output_success_new_path(test_folder):
-    """Test write output success."""
-    test_folder = f"{test_folder}/folder"
-    write_output("test-text", test_folder, "file-name")
-    assert os.path.exists(f"{test_folder}/file-name.txt")
-
-
-def test_write_output_success_already_exists(test_folder):
-    """Test write output success."""
-    write_output("test-text", test_folder, "file-name")
-    assert os.path.exists(f"{test_folder}/file-name.txt")
 
 
 # Test Check File
