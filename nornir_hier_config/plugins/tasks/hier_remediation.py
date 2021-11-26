@@ -26,13 +26,13 @@ def remediation(
     """Hier Config Remediation Task.
 
     Args:
-        task (Task): Task
-        running_config (str): Running Configuration. Path to file or string format.
-        generated_config (str): Generated Configuration. Path to file or string format.
-        remediation_config (str): Path to where remediation configuration should be placed.
-        options (Optional[str], optional): Path to Yaml file. Defaults to None but must be supplied as vars.
-        exclude_tags (Optional[List[str]], optional): Exclude tags. Defaults to None but can be supplied as vars.
-        include_tags (Optional[List[str]], optional): Include tags. Defaults to None but can be supplied as vars.
+        task (Task): Task\n
+        running_config (str): Running Configuration. Path to file or string format.\n
+        generated_config (str): Generated Configuration. Path to file or string format.\n
+        remediation_config (str): Path to where remediation configuration should be placed.\n
+        options (Optional[str], optional): Path to Yaml file. Defaults to None but must be supplied as vars.\n
+        exclude_tags (Optional[List[str]], optional): Exclude tags. Defaults to None but can be supplied as vars.\n
+        include_tags (Optional[List[str]], optional): Include tags. Defaults to None but can be supplied as vars.\n
 
     Returns:
         Result (Result): Nornir Result Response Object
@@ -46,27 +46,34 @@ def remediation(
         remediation_config=f"{TEST_PATH}/remediation_config.txt",\n
         )\n
         ```
-
-        If no YAML file with Options and Tags, you must specify them in Group Vars. The following keys are accessed
-        to retrieve the corresponding data:
+        \n
+        If no YAML file is supplied for Options and/or Tags, you must specify them in Group Vars.\n
+        This also applies to include and exclude tags. The following keys are accessed to retrieve\n
+        the corresponding data from group vars:\n
 
         - `hier_options` - Hier Config Options for device platform
         - `hier_tags` - Hier Config Tags for device platform
         - `hier_include_tags` - Hier Config Include Tags for remediation output
         - `hier_exclude_tags` - Hier Config Exclude Tags for remediation output
+        \n
 
-        This is what group vars should look like. This pattern applies for the above
+        The reason we check groupvars is because its easier to associate a group to a platform and not repeat
+        information for each host. This is what group vars should look like. This pattern applies for the above
         keys.
-
+        \n
         ```
-        ---\n
+        --- \n
         iosxr:\n
         username: "some_user"\n
         password: "some_password"\n
         platform: "iosxr"\n
         data:\n
             hier_options:  <--- All keys of interest fall under `data`. \n
-            style: "iosxr"\n
+            hier_tags:\n
+            hier_include_tags:\n
+              - "some inc tag"\n
+            hier_exclude_tags:\n
+              - "some exc tag"\n
         ```
     """
     failed: bool = False
