@@ -26,13 +26,13 @@ def remediation(
     """Hier Config Remediation Task.
 
     Args:
-        task (Task): Task
-        running_config (str): Running Configuration. Path to file or string format.
-        generated_config (str): Generated Configuration. Path to file or string format.
-        remediation_config (str): Path to where remediation configuration should be placed.
-        options (Optional[str], optional): Path to Yaml file. Defaults to None but must be supplied as vars.
-        exclude_tags (Optional[List[str]], optional): Exclude tags. Defaults to None but can be supplied as vars.
-        include_tags (Optional[List[str]], optional): Include tags. Defaults to None but can be supplied as vars.
+        task (Task): Task\n
+        running_config (str): Running Configuration. Path to file or string format.\n
+        generated_config (str): Generated Configuration. Path to file or string format.\n
+        remediation_config (str): Path to where remediation configuration should be placed.\n
+        options (Optional[str], optional): Path to Yaml file. Defaults to None but must be supplied as vars.\n
+        exclude_tags (Optional[List[str]], optional): Exclude tags. Defaults to None but can be supplied as vars.\n
+        include_tags (Optional[List[str]], optional): Include tags. Defaults to None but can be supplied as vars.\n
 
     Returns:
         Result (Result): Nornir Result Response Object
