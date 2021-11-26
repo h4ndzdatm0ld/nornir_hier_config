@@ -1,0 +1,3 @@
+ntp
+  server 10.10.10.1
+  source GigabitEthernet0/0/0/1

@@ -4,7 +4,6 @@ import hashlib
 import json
 import logging
 import os.path
-from pathlib import Path
 from typing import Any, Dict, Optional
 
 import yaml
@@ -18,8 +17,7 @@ def check_file(file_name: Optional[str]) -> bool:
         file_name (str): file name to check
     """
     try:
-        file_path = Path(file_name)  # type: ignore
-        return file_path.exists()
+        return os.path.isfile(file_name)  # type: ignore
     except TypeError:
         return False
 
@@ -64,21 +62,22 @@ def compare_files_state(remediation_config: str, remediation_config_string: str)
     Returns:
         result (TypedDict): True or False depending on if files equal each other and diff.
     """
-    result: Dict[Any, Any] = {"changed": False, "diff": None}
-    if remediation_config is not None:
-        md5_original = None
-        if check_file(remediation_config):
-            with open(remediation_config, "r", encoding="utf-8") as original:
-                remediation_config_read = original.read()
-            md5_original = hashlib.md5(remediation_config_read.encode("utf-8")).hexdigest()  # nosec
-        write_file(remediation_config_string, remediation_config)
+    result: Dict[str, Any] = {"changed": False, "diff": None}
+    md5_original = None
+    if check_file(remediation_config):
+        with open(remediation_config, "r", encoding="utf-8") as original:
+            remediation_config_read = original.read()
+        md5_original = hashlib.md5(remediation_config_read.encode("utf-8")).hexdigest()  # nosec
+    else:
+        remediation_config_read = ""
+    write_file(remediation_config_string, remediation_config)
 
-        with open(remediation_config, "r", encoding="utf-8") as updated:
-            remediation_config_updated = updated.read()
-        md5_new = hashlib.md5(remediation_config_updated.encode("utf-8")).hexdigest()  # nosec
-        if md5_new != md5_original:
-            deepdiff = DeepDiff(remediation_config_read, remediation_config_string)
-            result["diff"] = json.loads(deepdiff.to_json())
-            result["changed"] = True
+    with open(remediation_config, "r", encoding="utf-8") as updated:
+        remediation_config_updated = updated.read()
+    md5_new = hashlib.md5(remediation_config_updated.encode("utf-8")).hexdigest()  # nosec
+    if md5_new != md5_original:
+        deepdiff = DeepDiff(remediation_config_read, remediation_config_string)
+        result["diff"] = json.loads(deepdiff.to_json())
+        result["changed"] = True
 
     return result
