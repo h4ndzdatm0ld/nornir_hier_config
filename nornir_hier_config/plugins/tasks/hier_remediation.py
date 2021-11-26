@@ -46,27 +46,35 @@ def remediation(
         remediation_config=f"{TEST_PATH}/remediation_config.txt",\n
         )\n
         ```
-
-        If no YAML file with Options and Tags, you must specify them in Group Vars. The following keys are accessed
-        to retrieve the corresponding data:
-
+        \n
+        If no YAML file is supplied for Options and/or Tags, you must specify them in Group Vars.\n
+        This also applies to include and exclude tags.\n The following keys are accessed to retrieve\n
+        the corresponding data from group vars:\n
+        \n
         - `hier_options` - Hier Config Options for device platform
         - `hier_tags` - Hier Config Tags for device platform
         - `hier_include_tags` - Hier Config Include Tags for remediation output
         - `hier_exclude_tags` - Hier Config Exclude Tags for remediation output
-
+        \n
+        The reason we check groupvars is because its easier to assosciate a group to a platform and not repeat
+        information for each host.\n
+        \n
         This is what group vars should look like. This pattern applies for the above
         keys.
-
+        \n
         ```
-        ---\n
+        --- \n
         iosxr:\n
         username: "some_user"\n
         password: "some_password"\n
         platform: "iosxr"\n
         data:\n
             hier_options:  <--- All keys of interest fall under `data`. \n
-            style: "iosxr"\n
+            hier_tags:\n
+            hier_include_tags:\n
+              - "some inc tag"\n
+            hier_exclude_tags:\n
+              - "some exc tag"\n
         ```
     """
     failed: bool = False
