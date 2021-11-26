@@ -1,7 +1,5 @@
 # pylint: disable=too-many-locals
 """Hier Config Remediation Nornir Task."""
-
-import logging
 from typing import Any, Dict, List, Optional
 
 from hier_config import Host
@@ -14,8 +12,6 @@ from nornir_hier_config.utilities import (
     write_file,
 )
 
-log = logging.getLogger(__name__)
-
 
 def remediation(
     task: Task,
@@ -26,7 +22,7 @@ def remediation(
     tags: Optional[str] = None,  # If tags file, read yaml. Else default to "hier_tags"
     exclude_tags: Optional[List[str]] = None,
     include_tags: Optional[List[str]] = None,
-) -> Result:
+) -> Result:  # noqa: D301
     """Hier Config Remediation Task.
 
     Args:
@@ -39,16 +35,16 @@ def remediation(
         include_tags (Optional[List[str]], optional): Include tags. Defaults to None but can be supplied as vars.
 
     Returns:
-        Result
+        Result (Result): Nornir Result Response Object
 
     Example:
         ```
-        nr.run(
-        remediation,
-        running_config=f"{test_path}/running_config.txt",
-        generated_config=f"{test_path}/intended_config.txt",
-        remediation_config=f"{test_path}/remediation_config.txt",
-        )
+        nr.run(\n
+        remediation,\n
+        running_config=f"{TEST_PATH}/running_config.txt",\n
+        generated_config=f"{TEST_PATH}/intended_config.txt",\n
+        remediation_config=f"{TEST_PATH}/remediation_config.txt",\n
+        )\n
         ```
 
         If no YAML file with Options and Tags, you must specify them in Group Vars. The following keys are accessed
@@ -63,30 +59,29 @@ def remediation(
         keys.
 
         ```
-        ---
-        iosxr:
-        username: "some_user"
-        password: "some_password"
-        port: 830
-        platform: "iosxr"
-        data:
-            hier_options:  <--- All keys of interest fall under `data`.
-            style: "iosxr"
+        ---\n
+        iosxr:\n
+        username: "some_user"\n
+        password: "some_password"\n
+        platform: "iosxr"\n
+        data:\n
+            hier_options:  <--- All keys of interest fall under `data`. \n
+            style: "iosxr"\n
         ```
     """
     failed: bool = False
     changed: bool = False
     diff: str = ""
-    result: Dict[Any, Any] = {}
+    result: Dict[str, Any] = {}
 
     # Required args:
     required = (running_config, generated_config, remediation_config)
 
     if all(required):
-        # Get Tags and Options
         # Get data inherited from group vars
         ext_data = task.host.extended_data()
 
+        # Get Tags and Options
         opts = get_yaml(options) if check_file(options) else ext_data.get("hier_options")  # type: ignore
         tags = get_yaml(tags) if check_file(tags) else ext_data.get("hier_tags")  # type: ignore
 
@@ -107,14 +102,14 @@ def remediation(
         if tags:
             host.load_tags(tags)
 
+        # Get remediation
         host.remediation_config()
 
         # Get Include or Exclude Tags
-        inc = get_yaml(include_tags) if check_file(include_tags) else ext_data.get("hier_include_tags")  # type: ignore
-        exc = get_yaml(exclude_tags) if check_file(exclude_tags) else ext_data.get("hier_exclude_tags")  # type: ignore
+        inc = include_tags if include_tags else ext_data.get("hier_include_tags")
+        exc = exclude_tags if exclude_tags else ext_data.get("hier_exclude_tags")
 
         remediation_obj = host.remediation_config_filtered_text(include_tags=inc, exclude_tags=exc)
-        # remediation_config_string = "".join([line for line in remediation_obj])
         remediation_config_string = "".join(list(remediation_obj))
 
         file_state = compare_files_state(remediation_config, remediation_config_string)

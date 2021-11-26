@@ -1,5 +1,5 @@
 ---
-name: "nornir_hier_config"
+name: "CI-Testing"
 
 on:
   push:
@@ -56,6 +56,22 @@ jobs:
           poetry install --no-interaction
 
       - name: Pytest
+        run: poetry run pytest
+
+  codecov:
+    name: Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v1
+
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install --no-interaction
+
+      - name: Pytest
         run: |
           poetry run pytest --cov=nornir_hier_config --cov-report=xml -vvvv
 
@@ -63,3 +79,5 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+    needs:
+      - test

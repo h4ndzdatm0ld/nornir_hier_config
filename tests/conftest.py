@@ -1,5 +1,6 @@
 """Conftest for Nornir Plugin Unit Tests."""
 import os
+import shutil
 
 import pytest
 from nornir import InitNornir
@@ -31,7 +32,10 @@ def nornir():
                 "defaults_file": f"{DIR_PATH}/data/inventory_data/defaults.yml",
             },
         },
-        logging={"log_file": f"{DIR_PATH}/data/nornir_test.log", "level": "DEBUG"},
+        logging={
+            "log_file": f"{DIR_PATH}/data/nornir_test.log",
+            "level": "DEBUG",
+        },
     )
     nr_nr.data = global_data
     return nr_nr
@@ -44,6 +48,16 @@ def teardown_class():
         nornir_logfile = f"{DIR_PATH}/data/nornir_test.log"
         if os.path.exists(nornir_logfile):
             os.remove(nornir_logfile)
+
+    # Generated output from tests.
+    test_output_xr = f"{DIR_PATH}/data/configs/XR/simple_test_case/test_output"
+    test_output_xe = f"{DIR_PATH}/data/configs/XE/simple_test_case/test_output"
+
+    test_output_dirs = [test_output_xr, test_output_xe]
+
+    for test_dir in test_output_dirs:
+        if os.path.exists(test_dir):
+            shutil.rmtree(test_dir)
 
 
 @pytest.fixture(scope="function", autouse=True)
