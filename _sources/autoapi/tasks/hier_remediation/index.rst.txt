@@ -26,85 +26,79 @@ Functions
 
    Hier Config Remediation Task.
 
-      Args:
-          task (Task): Task
-          running_config (str): Running Configuration. Path to file or string format.
-          generated_config (str): Generated Configuration. Path to file or string format.
-          remediation_config (str): Path to where remediation configuration should be placed.
-          options (Optional[str], optional): Path to Yaml file. Defaults to None but must be supplied as vars.
-          exclude_tags (Optional[List[str]], optional): Exclude tags. Defaults to None but can be supplied as vars.
-          include_tags (Optional[List[str]], optional): Include tags. Defaults to None but can be supplied as vars.
+   Args:
+       task (Task): Task
+       running_config (str): Running Configuration. Path to file or string format.
+       generated_config (str): Generated Configuration. Path to file or string format.
+       remediation_config (str): Path to where remediation configuration should be placed.
+       options (Optional[str], optional): Path to Yaml file. Defaults to None but must be supplied as vars.
+       exclude_tags (Optional[List[str]], optional): Exclude tags. Defaults to None but can be supplied as vars.
+       include_tags (Optional[List[str]], optional): Include tags. Defaults to None but can be supplied as vars.
 
-      Returns:
-          Result (Result): Nornir Result Response Object
+   Returns:
+       Result (Result): Nornir Result Response Object
 
-      Example:
-          ```
-          nr.run(
+   Example:
+       ```
+       nr.run(
 
-          remediation,
+       remediation,
 
-          running_config=f"{TEST_PATH}/running_config.txt",
+       running_config=f"{TEST_PATH}/running_config.txt",
 
-          generated_config=f"{TEST_PATH}/intended_config.txt",
+       generated_config=f"{TEST_PATH}/intended_config.txt",
 
-          remediation_config=f"{TEST_PATH}/remediation_config.txt",
+       remediation_config=f"{TEST_PATH}/remediation_config.txt",
 
-          )
+       )
 
-          ```
-          
+       ```
+       
 
-          If no YAML file is supplied for Options and/or Tags, you must specify them in Group Vars.
+       If no YAML file is supplied for Options and/or Tags, you must specify them in Group Vars.
 
-          This also applies to include and exclude tags.
-   The following keys are accessed to retrieve
+       This also applies to include and exclude tags. The following keys are accessed to retrieve
 
-          the corresponding data from group vars:
+       the corresponding data from group vars:
 
-          
 
-          - `hier_options` - Hier Config Options for device platform
-          - `hier_tags` - Hier Config Tags for device platform
-          - `hier_include_tags` - Hier Config Include Tags for remediation output
-          - `hier_exclude_tags` - Hier Config Exclude Tags for remediation output
-          
+       - `hier_options` - Hier Config Options for device platform
+       - `hier_tags` - Hier Config Tags for device platform
+       - `hier_include_tags` - Hier Config Include Tags for remediation output
+       - `hier_exclude_tags` - Hier Config Exclude Tags for remediation output
+       
 
-          The reason we check groupvars is because its easier to assosciate a group to a platform and not repeat
-          information for each host.
 
-          
+       The reason we check groupvars is because its easier to associate a group to a platform and not repeat
+       information for each host. This is what group vars should look like. This pattern applies for the above
+       keys.
+       
 
-          This is what group vars should look like. This pattern applies for the above
-          keys.
-          
+       ```
+       --- 
 
-          ```
-          --- 
+       iosxr:
 
-          iosxr:
+       username: "some_user"
 
-          username: "some_user"
+       password: "some_password"
 
-          password: "some_password"
+       platform: "iosxr"
 
-          platform: "iosxr"
+       data:
 
-          data:
+           hier_options:  <--- All keys of interest fall under `data`. 
 
-              hier_options:  <--- All keys of interest fall under `data`. 
+           hier_tags:
 
-              hier_tags:
+           hier_include_tags:
 
-              hier_include_tags:
+             - "some inc tag"
 
-                - "some inc tag"
+           hier_exclude_tags:
 
-              hier_exclude_tags:
+             - "some exc tag"
 
-                - "some exc tag"
-
-          ```
-      
+       ```
 
 
