@@ -40,7 +40,26 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Readme</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Readme</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hier-config">Hier Config</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tasks">Tasks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#group-vars">Group Vars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#result-diff">Result Diff</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#contributions">Contributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
@@ -75,6 +94,255 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="nornir-hier-config">
 <h1>Nornir Hier Config<a class="headerlink" href="#nornir-hier-config" title="Permalink to this headline"></a></h1>
+<p><a class="reference external" href="https://codecov.io/gh/h4ndzdatm0ld/nornir_hier_config"><img alt="codecov" src="https://codecov.io/gh/h4ndzdatm0ld/nornir_hier_config/branch/develop/graph/badge.svg?token=C8QDR45SJQ" /></a>
+<a class="reference external" href="https://github.com/h4ndzdatm0ld/nornir_hier_config/actions/workflows/ci.yml/badge.svg"><img alt="Develop" src="https://github.com/h4ndzdatm0ld/nornir_hier_config/actions/workflows/ci.yml/badge.svg" /></a></p>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://h4ndzdatm0ld.github.io/nornir_hier_config/index.html">Documentation</a> is self-generated from <code class="docutils literal notranslate"><span class="pre">develop</span></code> branch and is hosted with Github Pages.</p>
+<section id="hier-config">
+<h3>Hier Config<a class="headerlink" href="#hier-config" title="Permalink to this headline"></a></h3>
+<p><a class="reference external" href="https://github.com/netdevops/hier_config">Hier Config</a> is a python library to build remediation steps in CLI format after evaluating a running configuration to an intended configuration.</p>
+<p><a class="reference external" href="https://netdevops.io/hier_config/">Hier Config Documentation</a> How to &amp; general information.</p>
+</section>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install nornir_hier_config
+</pre></div>
+</div>
+<section id="tasks">
+<h3>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">remediation</span></code> - Task available to use with Nornir to generate a remediation config.</p></li>
+</ul>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<p>Below is an example of using the remediation task. A running_config, generated_config and remediation_config (file path to save remediation) are required args. The options, tags, include &amp; exclude tags are able to be passed in as a path to a YAML file or can be set from Group Vars. Precedence to a YAML file is given if both options are present.</p>
+<p>If you would like to see a few more examples, please head over to the <code class="docutils literal notranslate"><span class="pre">tests</span></code> directory and review the integration tests.</p>
+<p>Snippet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">nr</span> <span class="o">=</span> <span class="n">nornir</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;PHX-01-69&quot;</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">nr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="n">remediation</span><span class="p">,</span>
+        <span class="n">running_config</span><span class="o">=</span><span class="s2">&quot;running_config.txt&quot;</span><span class="p">,</span>
+        <span class="n">generated_config</span><span class="o">=</span><span class="s2">&quot;intended_config.txt&quot;</span><span class="p">,</span>
+        <span class="n">remediation_config</span><span class="o">=</span><span class="s2">&quot;remediation_config-no-ntp.txt&quot;</span><span class="p">,</span>
+        <span class="n">options</span><span class="o">=</span><span class="s2">&quot;ios_options.yml&quot;</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="s2">&quot;ios_tags.yml&quot;</span><span class="p">,</span>
+        <span class="n">exclude_tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ntp&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<section id="group-vars">
+<h3>Group Vars<a class="headerlink" href="#group-vars" title="Permalink to this headline"></a></h3>
+<p>Unlike the Ansible collection which takes advantage of roles, the Nornir tasks uses Group Vars as the backup choice location if no YAML file is provided for several args. Lets take a look at our directory structure:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>inventory_data
+├── defaults.yml
+├── groups.yml
+└── hosts.yml
+
+<span class="m">0</span> directories, <span class="m">3</span> files
+</pre></div>
+</div>
+<p><strong>Below is an example of two hosts, using two different groups: <code class="docutils literal notranslate"><span class="pre">iosxr</span></code> and <code class="docutils literal notranslate"><span class="pre">ios</span></code>.</strong></p>
+<p>NOTE:
+Any keys to be accessed from group vars must be under the <code class="docutils literal notranslate"><span class="pre">data</span></code> key and should map to the following:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hier_options [Dict] - Hier Config Options for device platform
+
+hier_tags [Dict] - Hier Config Tags for device platform
+
+hier_include_tags [List] - Hier Config Include Tags for remediation output
+
+hier_exclude_tags [List] - Hier Config Exclude Tags for remediation output
+</pre></div>
+</div>
+<details>
+  <summary> Click to Expand! </summary>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">iosxr</span><span class="p">:</span>
+  <span class="nt">username</span><span class="p">:</span> <span class="s">&quot;netconf&quot;</span>
+  <span class="nt">password</span><span class="p">:</span> <span class="s">&quot;NCadmin123&quot;</span>
+  <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">830</span>
+  <span class="nt">platform</span><span class="p">:</span> <span class="s">&quot;iosxr&quot;</span>
+  <span class="nt">data</span><span class="p">:</span>
+    <span class="nt">hier_options</span><span class="p">:</span>
+      <span class="c1"># Indicates the style of the configuration</span>
+      <span class="nt">style</span><span class="p">:</span> <span class="s">&quot;iosxr&quot;</span>
+      <span class="nt">ordering</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;no</span><span class="nv"> </span><span class="s">ipv4</span><span class="nv"> </span><span class="s">access-list&quot;</span>
+          <span class="nt">order</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">400</span>
+        <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;router</span><span class="nv"> </span><span class="s">bgp&quot;</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;no</span><span class="nv"> </span><span class="s">neighbor&quot;</span>
+          <span class="nt">order</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">600</span>
+        <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;router</span><span class="nv"> </span><span class="s">bgp&quot;</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;address-family&quot;</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;no</span><span class="nv"> </span><span class="s">neighbor&quot;</span>
+          <span class="nt">order</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">600</span>
+
+      <span class="c1"># if there is a delta, overwrite these parents instead of one of their children</span>
+      <span class="nt">sectional_overwrite</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+      <span class="c1"># - lineage:</span>
+      <span class="c1">#  - re_search: ^((ip|ipv4|ipv6) )?access-list</span>
+
+      <span class="nt">sectional_overwrite_no_negate</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;as-path-set&quot;</span>
+        <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;prefix-set&quot;</span>
+        <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;route-policy&quot;</span>
+        <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;extcommunity-set&quot;</span>
+        <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;community-set&quot;</span>
+
+      <span class="nt">parent_allows_duplicate_child</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+      <span class="c1"># - lineage:</span>
+      <span class="c1">#  - startswith: route-policy</span>
+
+      <span class="nt">sectional_exiting</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;router</span><span class="nv"> </span><span class="s">bgp&quot;</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;address-family&quot;</span>
+          <span class="nt">exit_text</span><span class="p">:</span> <span class="s">&quot;exit-address-family&quot;</span>
+
+      <span class="c1"># adds +1 indent to lines following start_expression and removes the +1 indent for lines following end_expression</span>
+      <span class="nt">indent_adjust</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+      <span class="c1"># - start_expression: ^\s*template</span>
+      <span class="c1">#   end_expression: ^\s*end-template</span>
+
+      <span class="c1"># substitions against the full multi-line config text</span>
+      <span class="nt">full_text_sub</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+      <span class="c1"># - search: &#39;banner\s(exec|motd)\s(\S)\n(.*\n){1,}(\2)&#39;</span>
+      <span class="c1">#   replace: &#39;&#39;</span>
+
+      <span class="c1"># substitions against each line of the config text</span>
+      <span class="nt">per_line_sub</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+      <span class="c1"># - search: ^Building configuration.*</span>
+      <span class="c1">#  replace: &#39;&#39;</span>
+
+      <span class="nt">idempotent_commands_blacklist</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+      <span class="c1"># - lineage:</span>
+      <span class="c1">#  - lineage expression</span>
+
+      <span class="c1"># These commands do not require negation, they simply overwrite themselves</span>
+      <span class="nt">idempotent_commands</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;router</span><span class="nv"> </span><span class="s">bgp&quot;</span>
+            <span class="p p-Indicator">-</span> <span class="nt">endswith</span><span class="p">:</span> <span class="s">&quot;peer-group&quot;</span>
+            <span class="c1"># - lineage:</span>
+            <span class="c1"># - startswith: &quot;router bgp&quot;</span>
+            <span class="c1"># - re_search: &quot;neighbor (\d+\.\d+\.\d+\.\d+) peer-group)&quot;</span>
+      <span class="c1"># - lineage:</span>
+      <span class="c1">#  - startswith: interface</span>
+      <span class="c1">#  - startswith: ipv4 address</span>
+
+      <span class="c1"># Default when expression: list of lineage expressions</span>
+      <span class="nt">negation_default_when</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+      <span class="c1"># - lineage:</span>
+      <span class="c1">#  - lineage expression</span>
+
+      <span class="c1"># Negate substitutions: lineage expression -&gt; negate with</span>
+      <span class="nt">negation_negate_with</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+      <span class="c1"># - lineage:</span>
+      <span class="c1">#  - lineage expression</span>
+      <span class="c1">#  use: command</span>
+    <span class="nt">hier_tags</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span>
+              <span class="p p-Indicator">-</span> <span class="s">&quot;ipv4</span><span class="nv"> </span><span class="s">access-list&quot;</span>
+              <span class="p p-Indicator">-</span> <span class="s">&quot;no</span><span class="nv"> </span><span class="s">ipv4</span><span class="nv"> </span><span class="s">access-list&quot;</span>
+        <span class="nt">add_tags</span><span class="p">:</span> <span class="s">&quot;push&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;router</span><span class="nv"> </span><span class="s">bgp&quot;</span>
+          <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;address-family&quot;</span>
+          <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span>
+              <span class="p p-Indicator">-</span> <span class="s">&quot;neighbor&quot;</span>
+              <span class="p p-Indicator">-</span> <span class="s">&quot;no</span><span class="nv"> </span><span class="s">neighbor&quot;</span>
+              <span class="p p-Indicator">-</span> <span class="s">&quot;maximum-paths&quot;</span>
+              <span class="p p-Indicator">-</span> <span class="s">&quot;exit-address-family&quot;</span>
+        <span class="nt">add_tags</span><span class="p">:</span> <span class="s">&quot;push&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;router</span><span class="nv"> </span><span class="s">bgp&quot;</span>
+          <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span>
+              <span class="p p-Indicator">-</span> <span class="s">&quot;neighbor&quot;</span>
+              <span class="p p-Indicator">-</span> <span class="s">&quot;no</span><span class="nv"> </span><span class="s">neighbor&quot;</span>
+        <span class="nt">add_tags</span><span class="p">:</span> <span class="s">&quot;push&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="nt">lineage</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="nt">startswith</span><span class="p">:</span> <span class="s">&quot;aaa&quot;</span>
+        <span class="nt">add_tags</span><span class="p">:</span> <span class="s">&quot;ignore&quot;</span>
+<span class="nt">ios</span><span class="p">:</span>
+  <span class="nt">username</span><span class="p">:</span> <span class="s">&quot;developer&quot;</span>
+  <span class="nt">password</span><span class="p">:</span> <span class="s">&quot;C1sco12345&quot;</span>
+  <span class="nt">platform</span><span class="p">:</span> <span class="s">&quot;ios&quot;</span>
+</pre></div>
+</div>
+</details>
+</section>
+<section id="result-diff">
+<h3>Result Diff<a class="headerlink" href="#result-diff" title="Permalink to this headline"></a></h3>
+<p>Unlike the Ansible Collection, this Nornir task provides a friendly diff of what the remediation configuration will include. This happens if there is a change detected only. The underlying library providing the diff is <a class="reference external" href="https://deepdiff.readthedocs.io/en/latest/">DeepDiff</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>*************
+* PHX_LAB_02_XE ** changed : True **********************************************
+vvvv remediation ** changed : True vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO
+<span class="o">{</span> <span class="s1">&#39;values_changed&#39;</span>: <span class="o">{</span> <span class="s1">&#39;root&#39;</span>: <span class="o">{</span> <span class="s1">&#39;diff&#39;</span>: <span class="s1">&#39;--- \n&#39;</span>
+                                        <span class="s1">&#39;+++ \n&#39;</span>
+                                        <span class="s1">&#39;@@ -0,0 +1,5 @@\n&#39;</span>
+                                        <span class="s1">&#39;+no ntp server 10.20.30.40\n&#39;</span>
+                                        <span class="s1">&#39;+no ntp server 10.10.10.1\n&#39;</span>
+                                        <span class="s1">&#39;+interface GigabitEthernet3\n&#39;</span>
+                                        <span class="s1">&#39;+  ip address 192.168.0.100 &#39;</span>
+                                        <span class="s1">&#39;255.255.255.0\n&#39;</span>
+                                        <span class="s1">&#39;+  no shutdown&#39;</span>,
+                                <span class="s1">&#39;new_value&#39;</span>: <span class="s1">&#39;no ntp server 10.20.30.40\n&#39;</span>
+                                             <span class="s1">&#39;no ntp server 10.10.10.1\n&#39;</span>
+                                             <span class="s1">&#39;interface GigabitEthernet3\n&#39;</span>
+                                             <span class="s1">&#39;  ip address 192.168.0.100 &#39;</span>
+                                             <span class="s1">&#39;255.255.255.0\n&#39;</span>
+                                             <span class="s1">&#39;  no shutdown&#39;</span>,
+                                <span class="s1">&#39;old_value&#39;</span>: <span class="s1">&#39;&#39;</span><span class="o">}}}</span>
+^^^^ END remediation ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</pre></div>
+</div>
+</section>
+</section>
+<section id="contributions">
+<h2>Contributions<a class="headerlink" href="#contributions" title="Permalink to this headline"></a></h2>
+<hr class="docutils" />
+<p>No line of code shall go un tested! Any contribution will need to be accounted by the coverage report and satisfy all linting.</p>
+<p>Linters:</p>
+<ul class="simple">
+<li><p>Fake8</p></li>
+<li><p>Black</p></li>
+<li><p>Yamllint</p></li>
+<li><p>Pylint</p></li>
+<li><p>Pydocstyle</p></li>
+<li><p>Bandit</p></li>
+<li><p>MyPy</p></li>
+</ul>
+<section id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this headline"></a></h3>
+<p>To test within a local docker environment</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/h4ndzdatm0ld/nornir_hier_config
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose build <span class="o">&amp;&amp;</span> docker-compose run <span class="nb">test</span>
+</pre></div>
+</div>
+<p>To test locally with pytest</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poetry install <span class="o">&amp;&amp;</span> poetry shell
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest --cov<span class="o">=</span>nornir_hier_config --color<span class="o">=</span>yes --disable-pytest-warnings -vvv
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
 

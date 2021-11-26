@@ -22,19 +22,6 @@ Functions
 
 
 
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-   tasks.hier_remediation.log
-
-
-.. py:data:: log
-   
-
-   
-
 .. py:function:: remediation(task: nornir.core.task.Task, running_config: str, generated_config: str, remediation_config: str, options: Optional[str] = None, tags: Optional[str] = None, exclude_tags: Optional[List[str]] = None, include_tags: Optional[List[str]] = None) -> nornir.core.task.Result
 
    Hier Config Remediation Task.
@@ -49,16 +36,22 @@ Attributes
        include_tags (Optional[List[str]], optional): Include tags. Defaults to None but can be supplied as vars.
 
    Returns:
-       Result
+       Result (Result): Nornir Result Response Object
 
    Example:
        ```
        nr.run(
+
        remediation,
-       running_config=f"{test_path}/running_config.txt",
-       generated_config=f"{test_path}/intended_config.txt",
-       remediation_config=f"{test_path}/remediation_config.txt",
+
+       running_config=f"{TEST_PATH}/running_config.txt",
+
+       generated_config=f"{TEST_PATH}/intended_config.txt",
+
+       remediation_config=f"{TEST_PATH}/remediation_config.txt",
+
        )
+
        ```
 
        If no YAML file with Options and Tags, you must specify them in Group Vars. The following keys are accessed
@@ -74,14 +67,21 @@ Attributes
 
        ```
        ---
+
        iosxr:
+
        username: "some_user"
+
        password: "some_password"
-       port: 830
+
        platform: "iosxr"
+
        data:
-           hier_options:  <--- All keys of interest fall under `data`.
+
+           hier_options:  <--- All keys of interest fall under `data`. 
+
            style: "iosxr"
+
        ```
 
 

@@ -89,25 +89,6 @@
 </tr>
 </tbody>
 </table>
-</section>
-<section id="attributes">
-<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline"></a></h3>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tasks.hier_remediation.log" title="tasks.hier_remediation.log"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py data">
-<dt class="sig sig-object py" id="tasks.hier_remediation.log">
-<span class="sig-prename descclassname"><span class="pre">tasks.hier_remediation.</span></span><span class="sig-name descname"><span class="pre">log</span></span><a class="headerlink" href="#tasks.hier_remediation.log" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="tasks.hier_remediation.remediation">
 <span class="sig-prename descclassname"><span class="pre">tasks.hier_remediation.</span></span><span class="sig-name descname"><span class="pre">remediation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">nornir.core.task.Task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">running_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generated_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remediation_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">nornir.core.task.Result</span></span></span><a class="headerlink" href="#tasks.hier_remediation.remediation" title="Permalink to this definition"></a></dt>
@@ -121,16 +102,16 @@ options (Optional[str], optional): Path to Yaml file. Defaults to None but must 
 exclude_tags (Optional[List[str]], optional): Exclude tags. Defaults to None but can be supplied as vars.
 include_tags (Optional[List[str]], optional): Include tags. Defaults to None but can be supplied as vars.</p>
 </dd>
-<dt>Returns:</dt><dd><p>Result</p>
+<dt>Returns:</dt><dd><p>Result (Result): Nornir Result Response Object</p>
 </dd>
-<dt>Example:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">nr.run(</span>
-<span class="pre">remediation,</span>
-<span class="pre">running_config=f&quot;{test_path}/running_config.txt&quot;,</span>
-<span class="pre">generated_config=f&quot;{test_path}/intended_config.txt&quot;,</span>
-<span class="pre">remediation_config=f&quot;{test_path}/remediation_config.txt&quot;,</span>
-<span class="pre">)</span>
-<span class="pre">`</span></code></p>
+<dt>Example:</dt><dd><p><a href="#id1"><span class="problematic" id="id2">``</span></a>`
+nr.run(</p>
+<p>remediation,</p>
+<p>running_config=f”{TEST_PATH}/running_config.txt”,</p>
+<p>generated_config=f”{TEST_PATH}/intended_config.txt”,</p>
+<p>remediation_config=f”{TEST_PATH}/remediation_config.txt”,</p>
+<p>)</p>
+<p><a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
 <p>If no YAML file with Options and Tags, you must specify them in Group Vars. The following keys are accessed
 to retrieve the corresponding data:</p>
 <ul class="simple">
@@ -141,17 +122,16 @@ to retrieve the corresponding data:</p>
 </ul>
 <p>This is what group vars should look like. This pattern applies for the above
 keys.</p>
-<p>iosxr:
-username: “some_user”
-password: “some_password”
-port: 830
-platform: “iosxr”
-data:</p>
+<p>iosxr:</p>
+<p>username: “some_user”</p>
+<p>password: “some_password”</p>
+<p>platform: “iosxr”</p>
+<p>data:</p>
 <blockquote>
-<div><p>hier_options:  &lt;— All keys of interest fall under <cite>data</cite>.
-style: “iosxr”</p>
+<div><p>hier_options:  &lt;— All keys of interest fall under <cite>data</cite>.</p>
+<p>style: “iosxr”</p>
 </div></blockquote>
-<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a></p>
+<p><a href="#id7"><span class="problematic" id="id8">``</span></a><a href="#id9"><span class="problematic" id="id10">`</span></a></p>
 </dd>
 </dl>
 </dd></dl>
