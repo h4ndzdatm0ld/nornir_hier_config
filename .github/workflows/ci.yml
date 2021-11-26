@@ -82,6 +82,17 @@ jobs:
     needs:
       - test
 
+  publish_testpypi:
+    name: "Push Package to PyPI"
+    runs-on: "ubuntu-latest"
+    steps:
+      - run: poetry config repositories.testpypi https://test.pypi.org/legacy/
+      - run: poetry config pypi-token.testpypi ${{ secrets.PYPI_API_TOKEN }}
+      - name: Publish package
+        run: poetry publish --build -r testpypi
+    needs:
+      - test
+
   publish_pypi:
     name: "Push Package to PyPI"
     runs-on: "ubuntu-latest"
