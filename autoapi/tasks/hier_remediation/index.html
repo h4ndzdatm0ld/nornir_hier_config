@@ -93,7 +93,8 @@
 <dt class="sig sig-object py" id="tasks.hier_remediation.remediation">
 <span class="sig-prename descclassname"><span class="pre">tasks.hier_remediation.</span></span><span class="sig-name descname"><span class="pre">remediation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">nornir.core.task.Task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">running_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generated_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remediation_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">nornir.core.task.Result</span></span></span><a class="headerlink" href="#tasks.hier_remediation.remediation" title="Permalink to this definition"></a></dt>
 <dd><p>Hier Config Remediation Task.</p>
-<dl>
+<blockquote>
+<div><dl>
 <dt>Args:</dt><dd><p>task (Task): Task
 running_config (str): Running Configuration. Path to file or string format.
 generated_config (str): Generated Configuration. Path to file or string format.
@@ -112,14 +113,22 @@ nr.run(</p>
 <p>remediation_config=f”{TEST_PATH}/remediation_config.txt”,</p>
 <p>)</p>
 <p><a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
-<p>If no YAML file with Options and Tags, you must specify them in Group Vars. The following keys are accessed
-to retrieve the corresponding data:</p>
+<p>If no YAML file is supplied for Options and/or Tags, you must specify them in Group Vars.</p>
+<p>This also applies to include and exclude tags.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>The following keys are accessed to retrieve</p>
+<blockquote>
+<div><p>the corresponding data from group vars:</p>
 <ul class="simple">
 <li><p><cite>hier_options</cite> - Hier Config Options for device platform</p></li>
 <li><p><cite>hier_tags</cite> - Hier Config Tags for device platform</p></li>
 <li><p><cite>hier_include_tags</cite> - Hier Config Include Tags for remediation output</p></li>
 <li><p><cite>hier_exclude_tags</cite> - Hier Config Exclude Tags for remediation output</p></li>
 </ul>
+<p>The reason we check groupvars is because its easier to assosciate a group to a platform and not repeat
+information for each host.</p>
 <p>This is what group vars should look like. This pattern applies for the above
 keys.</p>
 <p>iosxr:</p>
@@ -129,11 +138,22 @@ keys.</p>
 <p>data:</p>
 <blockquote>
 <div><p>hier_options:  &lt;— All keys of interest fall under <cite>data</cite>.</p>
-<p>style: “iosxr”</p>
+<p>hier_tags:</p>
+<p>hier_include_tags:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“some inc tag”</p></li>
+</ul>
+</div></blockquote>
+<p>hier_exclude_tags:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“some exc tag”</p></li>
+</ul>
+</div></blockquote>
 </div></blockquote>
 <p><a href="#id7"><span class="problematic" id="id8">``</span></a><a href="#id9"><span class="problematic" id="id10">`</span></a></p>
-</dd>
-</dl>
+</div></blockquote>
 </dd></dl>
 
 </section>
