@@ -118,3 +118,7 @@ tests/stubs/*.pyi
 
 # Docs
 docs/README.md
+docs/public
+
+# Test data
+tests/data/configs/XR/simple_test_case/test_output/
