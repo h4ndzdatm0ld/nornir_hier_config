@@ -90,13 +90,16 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.general.create_folder" title="nornir_hier_config.utilities.general.create_folder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_folder</span></code></a>(directory: str) → None</p></td>
 <td><p>Create a directory.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.general.write_file" title="nornir_hier_config.utilities.general.write_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_file</span></code></a>(text: str, filename: str) → None</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.general.create_parent_dir" title="nornir_hier_config.utilities.general.create_parent_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_parent_dir</span></code></a>(path: str) → IO[str]</p></td>
+<td><p>Create any parent directories not present.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.general.write_file" title="nornir_hier_config.utilities.general.write_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_file</span></code></a>(text: str, filename: str) → None</p></td>
 <td><p>Take input and write a file.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.general.get_yaml" title="nornir_hier_config.utilities.general.get_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_yaml</span></code></a>(file_path: str) → Any</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.general.get_yaml" title="nornir_hier_config.utilities.general.get_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_yaml</span></code></a>(file_path: str) → Any</p></td>
 <td><p>Safe load a YAML file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.general.compare_files_state" title="nornir_hier_config.utilities.general.compare_files_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_files_state</span></code></a>(remediation_config: str, remediation_config_string: str) → Dict[Any, Any]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#nornir_hier_config.utilities.general.compare_files_state" title="nornir_hier_config.utilities.general.compare_files_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_files_state</span></code></a>(remediation_config: str, remediation_config_string: str) → Dict[Any, Any]</p></td>
 <td><p>Evaluate hashes to determine if an existing file has changed.</p></td>
 </tr>
 </tbody>
@@ -117,6 +120,18 @@
 <dd><p>Create a directory.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>directory (str): Directory path to create</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nornir_hier_config.utilities.general.create_parent_dir">
+<span class="sig-prename descclassname"><span class="pre">nornir_hier_config.utilities.general.</span></span><span class="sig-name descname"><span class="pre">create_parent_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">IO</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#nornir_hier_config.utilities.general.create_parent_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Create any parent directories not present.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path (str): Filename with path</p>
+</dd>
+<dt>Returns:</dt><dd><p>IO: Text Wrapper</p>
 </dd>
 </dl>
 </dd></dl>

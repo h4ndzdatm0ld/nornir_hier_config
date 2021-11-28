@@ -20,6 +20,7 @@ Functions
 
    nornir_hier_config.utilities.general.check_file
    nornir_hier_config.utilities.general.create_folder
+   nornir_hier_config.utilities.general.create_parent_dir
    nornir_hier_config.utilities.general.write_file
    nornir_hier_config.utilities.general.get_yaml
    nornir_hier_config.utilities.general.compare_files_state
@@ -40,6 +41,17 @@ Functions
 
    Args:
        directory (str): Directory path to create
+
+
+.. py:function:: create_parent_dir(path: str) -> IO[str]
+
+   Create any parent directories not present.
+
+   Args:
+       path (str): Filename with path
+
+   Returns:
+       IO: Text Wrapper
 
 
 .. py:function:: write_file(text: str, filename: str) -> None
