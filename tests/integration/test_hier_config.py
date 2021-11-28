@@ -1,11 +1,9 @@
 """Test Execution of Hier Remediation Tasks."""
 from datetime import datetime
 
-from nornir_hier_config.plugins.tasks import remediation
-from nornir_hier_config.utilities import create_folder
-
 from nornir_utils.plugins.functions import print_result
 
+from nornir_hier_config.plugins.tasks import remediation
 
 SINGLE_XR_DEVICE = "PHX_LAB_01_XR"
 SINGLE_XE_DEVICE = "PHX_LAB_02_XE"
@@ -36,7 +34,6 @@ def test_remediation_simple_with_diff(nornir, configs):
     nr = nornir.filter(name=SINGLE_XR_DEVICE)
     test_path = f"{configs}/XR/simple_test_case"
 
-    create_folder(f"{test_path}/test_output/")
     result = nr.run(
         remediation,
         running_config=f"{test_path}/running_config.txt",
@@ -425,7 +422,6 @@ def test_remediation_config_generated_strings(nornir, configs):
     ssh server netconf vrf default
     end
     """
-    create_folder(f"{test_path}/test_output/")
     result = nr.run(
         remediation,
         running_config=running_config,
@@ -440,7 +436,6 @@ def test_remediation_with_options(nornir, configs):
     nr = nornir.filter(name=SINGLE_XE_DEVICE)
     test_path = f"{configs}/XE/simple_test_case"
     extras = f"{configs}/hier_config_data"
-    create_folder(f"{test_path}/test_output/")
 
     result = nr.run(
         remediation,
@@ -459,7 +454,6 @@ def test_remediation_with_options_no_tags(nornir, configs):
     nr = nornir.filter(name=SINGLE_XE_DEVICE)
     test_path = f"{configs}/XE/simple_test_case"
     extras = f"{configs}/hier_config_data"
-    create_folder(f"{test_path}/test_output/")
 
     result = nr.run(
         remediation,
@@ -478,7 +472,6 @@ def test_remediation_with_both_exclude_ntp(nornir, configs):
     nr = nornir.filter(name=SINGLE_XE_DEVICE)
     test_path = f"{configs}/XE/simple_test_case"
     extras = f"{configs}/hier_config_data"
-    create_folder(f"{test_path}/test_output/")
 
     result = nr.run(
         remediation,
@@ -499,7 +492,6 @@ def test_remediation_no_remediation(nornir, configs):
     nr = nornir.filter(name=SINGLE_XE_DEVICE)
     test_path = f"{configs}/XE/simple_test_case"
     extras = f"{configs}/hier_config_data"
-    create_folder(f"{test_path}/test_output/")
 
     result = nr.run(
         remediation,

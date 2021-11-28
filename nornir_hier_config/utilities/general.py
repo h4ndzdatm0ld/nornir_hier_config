@@ -4,7 +4,7 @@ import hashlib
 import json
 import logging
 import os.path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, IO
 
 import yaml
 from deepdiff import DeepDiff
@@ -35,6 +35,19 @@ def create_folder(directory: str) -> None:
         logging.info("Error when creating %s, %s", directory, err_ex)
 
 
+def create_parent_dir(path: str) -> IO[str]:
+    """Create any parent directories not present.
+
+    Args:
+        path (str): Filename with path
+
+    Returns:
+        IO: Text Wrapper
+    """
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    return open(path, "w", encoding="utf-8")
+
+
 def write_file(text: str, filename: str) -> None:
     """Take input and write a file.
 
@@ -42,7 +55,7 @@ def write_file(text: str, filename: str) -> None:
         text (str): text to write
         filename (str): filename
     """
-    with open(f"{filename}", "w+", encoding="utf-8") as file:
+    with create_parent_dir(filename) as file:
         file.write(text)
 
 
