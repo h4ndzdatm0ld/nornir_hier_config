@@ -11,7 +11,6 @@ documentation = "https://tbd"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.10"
-hier-config = "^2.2.0"
 deepdiff = "^5.6.0"
 
 [tool.poetry.dev-dependencies]
@@ -33,6 +32,7 @@ mypy = "^0.910"
 nornir-utils = "^0.1.2"
 types-PyYAML = "^6.0.1"
 pytest = "^6.2.5"
+hier-config = "^2.2.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

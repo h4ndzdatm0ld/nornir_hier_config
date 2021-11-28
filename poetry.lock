@@ -204,7 +204,7 @@ typing-extensions = {version = ">=3.7.4.3", markers = "python_version < \"3.10\"
 name = "hier-config"
 version = "2.2.0"
 description = "A network configuration comparison tool, used to build remediation configurations."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.8,<4.0"
 
@@ -594,7 +594,7 @@ python-versions = "*"
 name = "pyyaml"
 version = "5.4.1"
 description = "YAML parser and emitter for Python"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*"
 
@@ -899,7 +899,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.10"
-content-hash = "f3e181a45727a493648776b58c4d2df1c684429f3ed831b724416563c8192db2"
+content-hash = "5872d9c09e8195563e8c6e608053aee98594a1ce0e7c8c13ed2c23b08d412bda"
 
 [metadata.files]
 alabaster = [

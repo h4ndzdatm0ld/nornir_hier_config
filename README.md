@@ -15,8 +15,14 @@
 
 ## Installation
 
+In order to use this Nornir Plugin, you will additionally need to install hier-config library from Pypi.
+
 ```bash
-pip3 install nornir_hier_config
+pip install hier-config
+```
+&
+```bash
+pip install nornir_hier_config
 ```
 
 ### Tasks
